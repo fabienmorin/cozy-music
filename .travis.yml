@@ -2,8 +2,6 @@ sudo: required
 language: node_js
 node_js:
 - 4
-python:
-- 2.7.9
 addons:
   apt:
     sources:
@@ -18,7 +16,7 @@ before_script:
 - cd transifex-client
 - git checkout 0.12.1
 - sudo python setup.py install
-- cd ..
+- cd $TRAVIS_BUILD_DIR
 - install -m0644 .transifexrc.tpl ~/.transifexrc
 - echo "password = $TX_PASSWD" >> ~/.transifexrc
 script:
@@ -26,7 +24,7 @@ script:
 - npm run test
 before_deploy:
 - npm run deploy
-- cd public
+- cd $TRAVIS_BUILD_DIR/public
 deploy:
   provider: npm
   email: frank@cozycloud.cc

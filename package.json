@@ -1,6 +1,6 @@
 {
   "name": "cozy-music",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "music description",
   "license": "AGPL-3.0",
   "cozy-type": "static",
