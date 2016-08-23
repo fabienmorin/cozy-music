@@ -55,7 +55,7 @@
     "build": "env OPTIMIZE=true webpack",
     "clean": "rm -rf public",
     "copy:manifest": "install -m0644 package.json README.md LICENSE public",
-    "deploy": "git-directory-deploy --directory public/ --branch build --repo=https://$GITHUB_TOKEN@github.com/cozy-labs/cozy-music.git",
+    "deploy": "git-directory-deploy --username music-autodeploy --email no-reply@cozy.io --directory public/ --branch build --repo=https://$GITHUB_TOKEN@github.com/cozy-labs/cozy-music.git",
     "tx": "tx pull --all || true",
     "postbuild": "npm run copy:manifest",
     "prebuild": "npm-run-all clean tx",
