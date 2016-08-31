@@ -71,7 +71,10 @@ const Playlist = Backbone.Model.extend({
             this.listenTo(
                 application.channel,{
                 // Reset upNext when clicking on the reset button
-                'upnext:reset': this.resetTrack,
+                'upnext:reset': () => {
+                    let currentTrack = application.appState.get('currentTrack');
+                    this.resetTrack(currentTrack);
+                },
                 // Add current playlist to upNext
                 'upnext:addCurrentPlaylist': this.addCurrentPlaylistToUpNext
             });

@@ -19,7 +19,6 @@ const Player = Mn.ItemView.extend({
 
     initialize() {
         this.listenTo(application.channel, {
-            'upnext:reset': this.reset,
             'player:next': this.next,
             'player:load': this.load
         });
