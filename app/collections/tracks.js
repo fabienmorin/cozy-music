@@ -72,20 +72,20 @@ cozysdk.defineView('Track', 'oldDoctype', (doc) => {
 }, callback);
 
 cozysdk.defineView('Track', 'file', (doc) => {
-    if (doc.ressource.type == 'file') {
+    if (doc.ressource.fileID) {
         emit(doc._id, doc.ressource.fileID);
     }
 }, callback);
 
 cozysdk.defineView('Track', 'allFileTrack', (doc) => {
-    if (doc.ressource.type == 'file') {
+    if (doc.ressource.fileID) {
         emit(doc._id, doc);
     }
 }, callback);
 
 cozysdk.defineView('Track', 'soundcloud', (doc) => {
-    if (doc.ressource.type == 'soundcloud') {
-        emit(doc._id, doc);
+    if (doc.ressource.url) {
+        emit(doc._id, doc.ressource);
     }
 }, callback);
 

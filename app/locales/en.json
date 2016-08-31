@@ -25,6 +25,7 @@
   "merdia error": "An error occured decoding this file",
   "network error": "A network error caused the media download to fail",
   "no playing music": "No playing music :(",
+  "one track not imported": "At least one of track have not been imported because it was not streamable",
   "paste the url here": "Paste the URL here",
   "play abort": "You aborted the media playback",
   "play error": "An error ocured while playing the track",
