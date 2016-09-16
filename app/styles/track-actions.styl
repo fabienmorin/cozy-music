@@ -1,6 +1,6 @@
 .tracks
     .actions
-        height: 41px
+        height: 100%
         visibility: hidden
         position: absolute
         right: 18px
@@ -13,8 +13,6 @@
         button:hover:not(.active)
             svg
                 fill: $text-dark
-            .help
-                visibility: visibile
 
         button
             height: 100%
@@ -24,13 +22,12 @@
                 width: 20px
                 fill: $svg
 
-    .all
-        #delete-from-upnext
-            display: none
 
-    .upNext
-        #add-to-upnext
+    @media (max-width: 63.9375em)
+        button:not(.menu)
             display: none
+        .menu
+            width: 30px !important
 
     .help
         position: absolute

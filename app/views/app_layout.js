@@ -31,6 +31,7 @@ const AppLayout = Mn.LayoutView.extend({
         // Init the audio html element
         application.audio = this.ui.player.get(0);
 
+        // Render child views
         this.showChildView('content', new ContentView({
             model: application.appState
         }));
@@ -47,6 +48,17 @@ const AppLayout = Mn.LayoutView.extend({
             model: application.appState
         }));
 
+        // Drawer event handler
+        let drawer = this.$el.children('[role="toolbar"]').get(0);
+        this.listenTo(application.channel, 'drawer:toggle', () => {
+            let isExpanded = drawer.getAttribute('aria-expanded') == 'true';
+            drawer.setAttribute('aria-expanded', !isExpanded);
+        });
+        this.listenTo(application.appState, 'change:currentPlaylist', () => {
+            drawer.setAttribute('aria-expanded', false);
+       })
+
+        // Dialog event handler
         application.channel.reply('dialog', this.showDialog, this);
     },
 

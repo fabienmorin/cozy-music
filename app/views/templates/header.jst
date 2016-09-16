@@ -1,3 +1,8 @@
+<button formaction="drawer/toggle">
+    <svg>
+        <use xlink:href="<%= require('../../assets/icons/menu-sm.svg') %>"/>
+    </svg>
+</button>
 <% if (type == 'playlist') { %>
 <h3><span id="playlist-title" contenteditable="true"><%= title %></span></h3>
 <% } else if (type == 'upNext') { %>

@@ -47,24 +47,27 @@ const Timeline = Mn.ItemView.extend({
     serializeData() {
         let currentTrack = application.appState.get('currentTrack');
         let audio = application.audio;
-        let currentTime, totalTime, timePercent, title;
+        let currentTime, totalTime, timePercent, title, artist;
 
         if (currentTrack) {
             currentTime = timeToString(audio.currentTime);
             totalTime = isNaN(audio.duration) ? '00:00' : timeToString(audio.duration);
             timePercent = audio.currentTime / audio.duration * 100 + '%';
             title = currentTrack.get('metas').title;
+            artist = currentTrack.get('metas').artist;
         } else  {
             currentTime = '00:00';
             totalTime = '00:00';
             timePercent = '00:00';
             title = t('no playing music');
+            artist = '';
         }
         return {
             'audioCurrentTime': currentTime,
             'totalTime': totalTime,
             'timePercent': timePercent,
-            'title': title
+            'title': title,
+            'artist': artist
         }
     }
 });

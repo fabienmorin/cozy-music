@@ -3,13 +3,43 @@
         visibility: hidden
         position: absolute
         min-width: 240px
-        z-index: 99
+        z-index: 6
         top: 37px
         right: 50px
         padding: 14px 0px
         border-radius: 10px
         background-color: white
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.2)
+
+        @media (max-width: 63.9375em)
+            position: fixed
+            width: 90vw
+            top: auto
+            right: auto
+            padding-top: 0px
+            left: 50%
+            bottom: 64px
+            transform: translate(-50%, 0)
+
+        .popup-header
+            display: none
+            width: 100%
+            flex-direction: column
+            padding: 10px 20px
+            margin-bottom: 10px
+            border-bottom: 1px solid #d5dce1
+
+            @media (max-width: 63.9375em)
+                display: flex
+
+            h4
+                color: $text-dark
+                font-size: 16px
+                margin-bottom: 4px
+
+            p
+                color: $text-light
+                font-size: 14px
 
         .small
             width: 14px
@@ -18,6 +48,10 @@
             position: absolute
             top: 24px
             right: 14px
+
+            @media (max-width: 63.9375em)
+                top: 76px
+
             svg
                 fill: $svg
         ul
@@ -26,6 +60,12 @@
 
             .edit-details
                 display: none // unimplemented
+
+            .add-to-upnext-menu
+                display: none
+
+                @media (max-width: 63.9375em)
+                    display: flex
 
             li
                 display: flex
@@ -51,7 +91,7 @@
                     fill: $svg
 
             li:hover
-                background-color: $background-dark;
+                background-color: $background-dark
 
     .show
         visibility: visible
@@ -63,13 +103,18 @@
         min-width: 240px
         display: inline-block
 
+        @media (max-width: 63.9375em)
+            right: auto
+            top: auto
+            width: 90vw
+
         .selected
             background-color: transparent
             &:hover
-                background-color: $background-dark;
+                background-color: $background-dark
 
         #add-playlist
-            border-top: 1px solid #d5dce1;
+            border-top: 1px solid #d5dce1
             height: 40px
             align-items: center
             padding: 0px 20px

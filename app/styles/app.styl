@@ -1,5 +1,6 @@
 $background-dark = #eff1f4
 $border-color = #cedae4
+$border-darker = #a7b5c6
 $grey = #a7b5c6
 $white = #ffffff
 $blue = #0dbabe
@@ -9,6 +10,7 @@ $text = #92a0b2
 $red = #ef4c57
 $svg = #696d78
 $svg-red = #f14a53
+$button-red = #ff5d47
 
 @import 'reset'
 global-reset()
@@ -55,6 +57,17 @@ placeholder()
 .spinner
     animation 1s linear infinite spin
 
+.overlay
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    z-index: 3
+    background-color: rgba(78, 91, 105, 0.75)
+
+
+
 @keyframes spin
     from
         transform rotate(0deg)
@@ -62,7 +75,7 @@ placeholder()
         transform rotate(359deg)
 
 @import 'tracks'
-@import 'header'
+@import 'content'
 @import 'track-actions'
 @import 'popup-menu'
 @import 'toolbar'

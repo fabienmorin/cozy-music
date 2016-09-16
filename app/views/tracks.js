@@ -15,8 +15,8 @@ const TracksView = Mn.CompositeView.extend({
          'mousedown .drag': 'dragStart',
          'click #title': 'sortByTitle',
          'click #artist': 'sortByArtist',
-         'click #album': 'sortByAlbum'
-
+         'click #album': 'sortByAlbum',
+         'mousedown': 'hideMenu'
     },
 
     initialize() {
@@ -186,6 +186,10 @@ const TracksView = Mn.CompositeView.extend({
             newIndex = newIndex == 0 ? 1 : newIndex;
         }
         this.dragObj.newIndex = newIndex;
+    },
+
+    hideMenu(e) {
+        application.channel.trigger('track:hideMenu');
     },
 
     displayTrack(appState, currentPlaylist) {

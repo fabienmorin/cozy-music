@@ -1,0 +1,119 @@
+main
+    flex-grow: 1
+
+    @media (max-width: 63.9375em)
+        border-left: solid 1px #cedae4
+        z-index:    2
+        position:   relative
+        transform:  translateX(0)
+        transition: transform 350ms ease-out
+
+
+div[role='contentinfo']
+    background-color: white
+    padding: 25px 33px
+    overflow-y: scroll
+    height: 100vh
+
+    @media (max-width: 63.9375em)
+        margin-top: 48px
+        margin-bottom: 48px
+        padding: 0
+
+    div[role='complementary']
+        > div
+            @media (max-width: 63.9375em)
+                display: flex
+                justify-content: center
+                align-items: center
+                height: 100%
+
+
+        @media (max-width: 63.9375em)
+            position: absolute
+            top: 0px
+            left: 0px
+            height: 48px
+            width: 100vw
+            z-index: 3
+            background-color: $background-dark
+            box-shadow: 0 0 6px 4px rgba(78, 91, 105, 0.08), inset 0 -1px 0 0 #cedae4
+
+
+        [formaction="drawer/toggle"]
+            position: absolute
+            top: 0px
+            left: 0px
+            svg
+                height: 20px
+                width: 20px
+                margin: 14px
+                fill: $svg
+                cursor: pointer
+
+            @media (min-width: 64em)
+                display: none
+
+        h3
+            font-size: 24px
+            height: 34px
+            text-align: center
+            color: $text-dark
+            display: inline-block
+
+            @media (max-width: 63.9375em)
+                height: 24px
+                font-size: 20px
+
+            span
+                padding: 0 8px
+
+        span[contenteditable='true']:hover
+            background-color: $background-dark
+
+        span[contenteditable='true']:focus
+            background-color: $background-dark
+
+        p
+            font-size: 24px
+            height: 31px
+            text-align: center
+            display: inline-block
+            color: $text-light
+
+            @media (max-width: 63.9375em)
+                height: 24px
+                font-size: 20px
+
+        button:not([formaction="drawer/toggle"])
+            padding: 0px 12px
+            height: 32px
+            float: right
+            display: inline-block
+            cursor: pointer
+            font-family: 'Source Sans Pro'
+            font-weight: bold
+            color: $text-light
+            background-color: $background-dark
+            border-radius: 2px
+            position: relative
+            padding-left: 32px
+            text-transform: uppercase
+            font-size: 16px
+
+            @media (max-width: 63.9375em)
+                position: absolute
+                top: 8px
+                right: 12px
+                font-size: 0px
+
+            svg
+                position: absolute
+                height: 20px
+                left: 9px
+                width: 20px
+                top: 6px
+                fill: $svg
+
+        button:active
+            padding-top: 1px

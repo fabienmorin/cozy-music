@@ -1,8 +1,11 @@
 <div class="text-container">
-    <p id="trackname"><%= title %></p>
+    <span id="title"><%= title %></span>
+    <% if (artist != "") {%>
+    	<span id="artist"><%= artist %></span>
+    <% } %>
 </div>
 <div id="progress-bar">
     <div id="progress" style="width:<%= timePercent %>"></div>
 </div>
-<p id="current-time"><%= audioCurrentTime %></p>
-<p id="total-time"><%= totalTime %></p>
+<span id="current-time"><%= audioCurrentTime %></span>
+<span id="total-time"><%= totalTime %></span>

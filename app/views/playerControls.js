@@ -11,6 +11,7 @@ const Player = Mn.ItemView.extend({
         'click #prev': 'prev',
         'click #play': 'toggle',
         'click #next': 'next',
+        'click #toggle-expand': 'expand'
     },
 
     modelEvents: {
@@ -55,7 +56,14 @@ const Player = Mn.ItemView.extend({
                     application.appState.set('currentVolume', volume);
                     break;
                 case 77: // m
-                    this.toggleVolume();
+                    //this.toggleVolume();
+                            let dialog = {
+            accept: () => {},
+            dismiss: () => {},
+            title: t('title track problem'),
+            message: t('track problem')
+        }
+        application.channel.request('dialog', dialog);
                     break;
             }
         });
@@ -212,6 +220,13 @@ const Player = Mn.ItemView.extend({
         audio.currentTime = 0;
         audio.play();
         this.render();
+    },
+
+    expand(e) {
+        e.preventDefault();
+        let player = this.$el.parent().parent().get(0);
+        let isExpanded = player.getAttribute('aria-expanded') == 'true'
+        player.setAttribute('aria-expanded', !isExpanded);
     },
 
     serializeData() {

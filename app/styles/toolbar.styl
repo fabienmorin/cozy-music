@@ -7,7 +7,23 @@ div[role='toolbar']
     display: flex
     flex-direction: column
     background-color: $background-dark
-    border: solid 1px #cedae4
+    border: solid 1px $border-color
+
+    @media (max-width: 63.9375em)
+        toggle-width = 18vw
+
+        box-shadow: inset -1px 0 0 0 $border-darker
+        z-index:       1
+        position:      absolute
+        top:           0
+        left:          0
+        width:         100vw
+        height:        100vh
+        padding-right: toggle-width
+
+        &[aria-expanded=true] + main
+            transform translateX("calc(100vw - %s)" % toggle-width)
+
 
     .tools
         padding-left: 16px
@@ -26,6 +42,9 @@ div[role='toolbar']
             width: 100%
             padding-left: 15px
             box-sizing: border-box
+
+            @media (max-width: 63.9375em)
+                display: none
 
             #import-sc-text
                 display: none

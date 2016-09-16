@@ -33,6 +33,10 @@
 </div>
 <div class="length-column-cell" role="gridcell"><%- duration %></div>
 <div id="popup-menu" class="popup-menu">
+    <div class="popup-header">
+        <h4><%- title %></h4>
+        <p><%- artist %></p>
+    </div>
     <ul>
         <li class="add-to-playlist">
             <svg>
@@ -43,6 +47,18 @@
                 <use xlink:href="<%= require('../../assets/icons/play-sm.svg') %>"/>
             </svg>
             <div class="playlist-popup-container">
+        </li>
+        <li class="add-to-upnext">
+            <svg>
+                <use xlink:href="<%= require('../../assets/icons/add-to-playlist-sm.svg') %>"/>
+            </svg>
+            <%= t('add to upnext') %>
+        </li>
+        <li class="delete-from-upnext">
+            <svg>
+                <use xlink:href="<%= require('../../assets/icons/cross-sm.svg') %>"/>
+            </svg>
+            <%= t('remove from upnext') %>
         </li>
         <li class="remove-from-playlist">
             <svg>

@@ -66,6 +66,14 @@ const TrackView = Mn.LayoutView.extend({
                 this.setOrder();
             }
         }, this);
+
+        this.listenTo(application.channel, 'track:hideMenu', () => {
+            let selectedTracks = application.selected.get('tracks');
+            let isSelected = selectedTracks.get(this.model.get('_id'));
+            if (!isSelected) {
+                this.hidePopupMenu()
+            }
+        });
     },
 
     onRender() {
@@ -78,12 +86,22 @@ const TrackView = Mn.LayoutView.extend({
 
     select(e) {
         e.preventDefault();
+
         let selectedTracks = application.selected.get('tracks');
+        let isSelected = selectedTracks.get(this.model.get('_id'));
+        let isMenuTouch = $(e.target).parents('#popup-menu').length;
+        let width = $(window).width();
+
+        // If we are on a touch capable device, play the track on touch
+        if ('ontouchstart' in window && isSelected && !isMenuTouch) {
+            this.play(e);
+            return;
+        }
 
         // Prevent resetting the selected playlist when clicking on menu
         if (e.target.parentElement.parentElement.id != 'track-list') {
             // if this.model is not selected, select only it, else prevent reset
-            if (!selectedTracks.get(this.model.get('_id'))) {
+            if (!isSelected) {
                 application.selected.resetTrack(this.model);
             } else {
                 return;
@@ -158,6 +176,7 @@ const TrackView = Mn.LayoutView.extend({
         tracks.each((t) => {
             application.upNext.addTrack(t);
         });
+        this.hidePopupMenu();
 
         let notification = {
             status: 'ok',

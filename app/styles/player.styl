@@ -1,20 +1,124 @@
 .player
     box-sizing: border-box
     position:absolute
-    bottom:0
-    left:0
+    bottom:0px
+    left:0px
     height: 72px
-    width: 100%
+    width: 100vw
     background-color: $background-dark
     border: solid 1px $border-color
     display: flex
 
+    @media (max-width: 63.9375em)
+        height: 50px
+        padding-top: 5px
+        z-index    2
+
+        &[aria-expanded=true]
+            height: 186px
+            flex-direction: column
+
+            .play-controls
+                order: 3
+                padding-left: 0px
+                width: 100vw
+                margin-top: 4px
+
+                svg
+                    height: 34px
+                    width: 34px
+
+                > div
+                    width: 100vw
+                    justify-content: center
+                    display: flex
+
+                #prev
+                    display: block
+
+                #toggle-expand
+                    top: auto
+                    bottom: 0px
+                    left: calc(50vw - 26px)
+
+                    svg
+                        margin-bottom: 6px
+                        height: 20px
+                        width: 20px
+                    .up
+                        display: none
+                    .down
+                        display: block
+
+            .timeline
+                margin-top: 18px
+                margin-right: 0px
+                margin-left: 0px
+                display: flex
+                flex-direction: column
+                align-items: center
+                justify-content: center
+                flex-grow: 0
+
+                .text-container
+                    align-items: center
+                #progress-bar
+                    margin-top: 18px
+                    max-width: 700px
+                    width: 80vw
+                    position: static
+
+
+            .controls-extended
+                display: block
+
+                svg
+                    margin-right: 0px
+
+                #volume-bar,
+                #speaker
+                    display: none
+
+                #repeat
+                    position absolute
+                    top: 82px
+                    right: calc(50vw - 130px)
+
+                #shuffle
+                    position: absolute
+                    top: 82px
+                    left: calc(50vw - 130px)
+
     .play-controls
-        padding-left 16px
-        padding-top: 12px
-        padding-bottom: 12px
+        padding-left: 16px
         width: 280px
         box-sizing: border-box
+        display: flex
+        align-items: center
+
+        @media (max-width: 63.9375em)
+            justify-content: flex-end
+            order:3
+
+            #prev
+                display: none
+
+            #toggle-expand
+                display: block !important
+                position: absolute
+                top: 2px
+                left: 0px
+
+                svg
+                    height: 24px
+                    width: 24px
+
+                .down
+                    display: none
+
+
+        #toggle-expand
+            display: none
 
         .album
             height: 48px
@@ -22,6 +126,10 @@
             box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1)
             padding: 0px
             background-color: white
+
+            @media (max-width: 63.9375em)
+                display: none
+
             svg
                 padding-left: 7px
                 fill: $blue
@@ -34,25 +142,49 @@
             padding-left: 28px
             fill: $svg
 
+            @media (max-width: 63.9375em)
+                height: 24px
+                width: 24px
+                padding: 0px
+                margin: 12px
+
     .timeline
         margin-left: 32px
         margin-right: 32px
         flex-grow: 1
+
+        @media (max-width: 63.9375em)
+            margin-left: 52px
+
+            #current-time,
+            #total-time
+                display: none
 
         .text-container
             width: 100%
             justify-content: center
             display: flex
 
-            p
+            @media (max-width: 63.9375em)
+                flex-direction: column
+
+            span
                 ellipsis()
                 margin-top: 6px
+
+                @media (max-width: 63.9375em)
+                    margin-top: 0px
+
+            #title
                 color: $text-light
 
-            #artist
-                color: $text-light
+            #artist::before
+                content: "\00a0-\00a0"
 
-        p
+                @media (max-width: 63.9375em)
+                    content: ""
+
+        span
             color: $text
             height: 20px
             font-family: "Source Sans Pro"
@@ -61,6 +193,8 @@
             line-height: 1.5
             display: inline-block
             margin-top: 2px
+
+
 
         #total-time
             float: right
@@ -73,6 +207,12 @@
             border-radius: 2px
             cursor: pointer
 
+            @media (max-width: 63.9375em)
+                margin-top: 0px
+                position: absolute
+                top: 0px
+                left: 0px
+
             #progress
                 width: 0%
                 height: 4px
@@ -81,6 +221,9 @@
 
     .controls-extended
         width: 280px
+
+        @media (max-width: 63.9375em)
+            display: none
 
         #volume-bar
             width: 90px

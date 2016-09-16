@@ -28,6 +28,9 @@
         font-size: 13px
         text-transform: uppercase
 
+        @media (max-width: 63.9375em)
+            display: none
+
         :not(#number)
             svg
                 display: none
@@ -70,8 +73,15 @@
             height: 18px
             fill: $svg
 
+        @media (max-width: 63.9375em)
+            display: none
+
     .song-column-cell
         flex-grow: 1
+        color: $text-dark
+
+        @media (max-width: 63.9375em)
+            flex-grow: 0
 
     .artist-column-cell
         width: 200px
@@ -80,8 +90,18 @@
         position: relative
         width: 200px
 
+        @media (max-width: 63.9375em)
+            color: transparent
+            position: absolute
+            top: 0px
+            right: 0px
+            height: 64px
+
     .length-column-cell
         width: 62px
+
+        @media (max-width: 63.9375em)
+            display: none
 
     .play-icon:hover
         fill: $text-dark
@@ -89,6 +109,9 @@
     #track-list
         display: flex
         flex-direction: column
+
+        @media (max-width: 63.9375em)
+            margin-bottom: 42px
 
         > li
             display: flex
@@ -99,6 +122,21 @@
             font-size: 14px
             color: $text-light
             position: relative
+
+            @media (max-width: 63.9375em)
+                padding-left: 14px
+                height: 64px
+                flex-direction: column
+                justify-content: center
+
+                .actions
+                    visibility: visible
+
+            .song-column-cell
+                font-size: 16px
+
+                @media (max-width: 63.9375em)
+                    padding-bottom: 6px
 
             &.dragged
                 opacity: 0.5
@@ -123,11 +161,6 @@
 
                     .play
                         display: none
-
-            .song-column-cell
-                flex-grow: 1
-                font-size: 16px
-                color: $text-dark
 
         li:hover:not(.dragover)
             background-color: $background-dark

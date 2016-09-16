@@ -1,14 +1,8 @@
 div[role='dialog']
-    .overlay
-        position: fixed
-        top: 0
-        left: 0
-        width: 100%
-        height: 100%
-        background-color: rgba(78, 91, 105, 0.75)
 
     .dialog
         box-sizing: border-box
+        z-index: 10
         padding: 32px
         position: fixed
         top: 50%
@@ -18,6 +12,9 @@ div[role='dialog']
         border-radius: 10px
         background-color: $white
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.17), 0 6px 18px 0 rgba(0, 0, 0, 0.19)
+
+        @media (max-width: 37.5em)
+            width: 90vw
 
         .buttons
             margin-top: 32px
@@ -36,8 +33,11 @@ div[role='dialog']
             box-sizing: border-box
             text-align:center
 
+            @media (max-width: 37.5em)
+                width: 33vw
+
             &.accept
-                background-color: #ff5d47
+                background-color: $button-red
                 color: white
 
             &:active

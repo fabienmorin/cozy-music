@@ -14,7 +14,8 @@ const Header = Mn.ItemView.extend({
         'click #reset-upnext': 'resetUpNext',
         'click #delete-playlist': 'deletePlaylist',
         'keypress @ui.title': 'keypressPlaylistTitle',
-        'blur @ui.title' : 'savePlaylistTitle'
+        'blur @ui.title' : 'savePlaylistTitle',
+        'click [formaction="drawer/toggle"]': 'toggleDrawer'
     },
 
     modelEvents: {
@@ -79,6 +80,11 @@ const Header = Mn.ItemView.extend({
     resetUpNext() {
         application.channel.trigger('upnext:reset');
     },
+
+    toggleDrawer(e) {
+        e.preventDefault();
+        application.channel.trigger('drawer:toggle');
+    }
 
 });
 
