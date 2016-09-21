@@ -1,31 +1,34 @@
-sudo: required
 language: node_js
+matrix:
+  fast_finish: true
 node_js:
-- 4
+  - "4"
+branches:
+  except:
+    - build
+env:
+  global:
+    - CXX=g++-4.8
+    - secure: y1xuAMtE5PR9tQ2yGYWRCh9p1aq2eDhJgIs2v4m5+IBHco1DZMzavQ6XPhryj0Y9IhkHWPvK5HOEz/J8UAIF0KL+8IFQX6eNI3PwzRIRQmXa+YvREAaSE+1PBg5gpP1YAN6khb24ksPWHXiAmdV7e+KiVospGA6Bs3SEPyJKlSebRq/Pw/RG+qljBk8FjFFs9QVC/d/6SP6EbMoZAD3ZaALtIqBOP4N9Jk/zivQmNlZDI231PY2h+XUU9QUR8EEu6Z/aT9tk+6zkfFYZR61crhrdIYS8mvmcu/Z1EPSWpNLf9Zr0EnnmB4z/DdUJx4NnmcyTQ8TZYE8mU1Tvlzm7pvOzTBd0pZkr56G8J2bGgaAadiDuf77Fb3N4yPZYqIIjsPEpE0DxCXMBVy5zJAbrc1BQJh2I+8Clk7xbuPjtxHI8vxAOm/c8m6VTIWGcMmFMtIrtYut+youE93VEvbdReDOJIgkKV3oPhynXPzumf5VVR3uf2w6fXKh3emOairV/bhR4M/V4CoLWkFGAe9+V3HMq4woMcz74o6DA2ueo9iA17bh9bg2mlQWATq+uQuuy1eXIWwe+vF28CHMYHnJ3o00hivdVASp0Q7EZjQAPkX48tC9FonUZ7Z3TK1QCkDcZB/gJGNFZLJuxwaNh1kfwfL1+EZgTLV4w0x8ZIo99ff8=
+    - secure: lGgFcnIoAqFAQaMhOJHPctFjtoeIwr215xJt8+KHF7C8k0dnreik21sGOJj8NRH5yOeseOiPr7u0xOk7hUuSfIg95YKWVPCnVaClrUrSHh3n+xhvgymcOvJeEDj9j48nkUfMqBlHSDVz9irPHTa94OOrZIdt7fqme/ifT5yUgL3yx4urXy1sz4JXud0LPhVwElUein/3i74rGVp1G5wQJWDyI7BxOzDTBYs0ELovohEOjfc9QbiVSAp2bldUeDUgA7QEvj8Y83dzMkmTQ82fR6YRO0+8iDBUq+U4zeGij3grSeoYx3KJCPAq7LdYpNd95xIJ9gvouwZARQaJzBZ8YNve3E9wWakSPbcQl+5cPEjNt5c41RwRdtKtyHIJizGzpc/3DpeslrwM8FxRlKVV5I3azkiEZ9PrNjkuB5zWYXWYInII6QEnfJc1oxx/zffYF2IDc3t01m5oxNVeurdMTiJ0dgRgXoaSnT/vsVeyFw/lHbOPvG4C8dU/pyGJXEBukGp6QY9JZ6AxbpsOY13ukwFM4ZmZxr2KjBjGGb/EcfGhKWlYOH7wKWesQ7G9r93WwsFwux66aCAPJL783C19fwwnZ27prIDfsDB1JTHf0UClj7ZPCtG7j0J8k7otzkwSeh/97oWFzLEe+l7IodZA+Sxa7JEr5dgiM+viwOXo/jc=
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
+      - deadsnakes
     packages:
-    - g++-4.8
+      - g++-4.8
+      - python3.5
 cache:
   directories:
-  - node_modules
+    - node_modules
 before_script:
-- git clone http://code.transifex.com/transifex-client
-- cd transifex-client
-- git checkout 0.12.1
-- sudo python setup.py install
-- cd $TRAVIS_BUILD_DIR
-- install -m0644 .transifexrc.tpl ~/.transifexrc
-- echo "password = $TX_PASSWD" >> ~/.transifexrc
+  - curl -fsSL https://bootstrap.pypa.io/get-pip.py | python3.5 - --user
+  - travis_retry pip3.5 install --user transifex-client
+  - install -m0644 .transifexrc.tpl ~/.transifexrc
+  - echo "password = $TX_PASSWD" >> ~/.transifexrc
 script:
-- npm run build
-- npm run test
+  - npm run build
+  - npm run test
 after_success:
-- test $TRAVIS_BRANCH = "master" && npm run deploy
-env:
-  global:
-  - CXX=g++-4.8
-  - secure: y1xuAMtE5PR9tQ2yGYWRCh9p1aq2eDhJgIs2v4m5+IBHco1DZMzavQ6XPhryj0Y9IhkHWPvK5HOEz/J8UAIF0KL+8IFQX6eNI3PwzRIRQmXa+YvREAaSE+1PBg5gpP1YAN6khb24ksPWHXiAmdV7e+KiVospGA6Bs3SEPyJKlSebRq/Pw/RG+qljBk8FjFFs9QVC/d/6SP6EbMoZAD3ZaALtIqBOP4N9Jk/zivQmNlZDI231PY2h+XUU9QUR8EEu6Z/aT9tk+6zkfFYZR61crhrdIYS8mvmcu/Z1EPSWpNLf9Zr0EnnmB4z/DdUJx4NnmcyTQ8TZYE8mU1Tvlzm7pvOzTBd0pZkr56G8J2bGgaAadiDuf77Fb3N4yPZYqIIjsPEpE0DxCXMBVy5zJAbrc1BQJh2I+8Clk7xbuPjtxHI8vxAOm/c8m6VTIWGcMmFMtIrtYut+youE93VEvbdReDOJIgkKV3oPhynXPzumf5VVR3uf2w6fXKh3emOairV/bhR4M/V4CoLWkFGAe9+V3HMq4woMcz74o6DA2ueo9iA17bh9bg2mlQWATq+uQuuy1eXIWwe+vF28CHMYHnJ3o00hivdVASp0Q7EZjQAPkX48tC9FonUZ7Z3TK1QCkDcZB/gJGNFZLJuxwaNh1kfwfL1+EZgTLV4w0x8ZIo99ff8=
-  - secure: lGgFcnIoAqFAQaMhOJHPctFjtoeIwr215xJt8+KHF7C8k0dnreik21sGOJj8NRH5yOeseOiPr7u0xOk7hUuSfIg95YKWVPCnVaClrUrSHh3n+xhvgymcOvJeEDj9j48nkUfMqBlHSDVz9irPHTa94OOrZIdt7fqme/ifT5yUgL3yx4urXy1sz4JXud0LPhVwElUein/3i74rGVp1G5wQJWDyI7BxOzDTBYs0ELovohEOjfc9QbiVSAp2bldUeDUgA7QEvj8Y83dzMkmTQ82fR6YRO0+8iDBUq+U4zeGij3grSeoYx3KJCPAq7LdYpNd95xIJ9gvouwZARQaJzBZ8YNve3E9wWakSPbcQl+5cPEjNt5c41RwRdtKtyHIJizGzpc/3DpeslrwM8FxRlKVV5I3azkiEZ9PrNjkuB5zWYXWYInII6QEnfJc1oxx/zffYF2IDc3t01m5oxNVeurdMTiJ0dgRgXoaSnT/vsVeyFw/lHbOPvG4C8dU/pyGJXEBukGp6QY9JZ6AxbpsOY13ukwFM4ZmZxr2KjBjGGb/EcfGhKWlYOH7wKWesQ7G9r93WwsFwux66aCAPJL783C19fwwnZ27prIDfsDB1JTHf0UClj7ZPCtG7j0J8k7otzkwSeh/97oWFzLEe+l7IodZA+Sxa7JEr5dgiM+viwOXo/jc=
+  - test $TRAVIS_BRANCH = "master" && npm run deploy
