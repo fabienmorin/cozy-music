@@ -21,7 +21,7 @@
     "backbone.marionette": "2.4.7",
     "backbone.radio": "1.0.2",
     "backbone.subroute": "0.4.6",
-    "cozysdk-client": "0.0.6",
+    "cozysdk-client": "0.0.7",
     "jquery": "2.2.0",
     "json-loader": "0.5.4",
     "node-polyglot": "1.0.0",

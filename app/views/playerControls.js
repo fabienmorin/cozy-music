@@ -21,7 +21,8 @@ const Player = Mn.ItemView.extend({
     initialize() {
         this.listenTo(application.channel, {
             'player:next': this.next,
-            'player:load': this.load
+            'player:load': this.load,
+            'player:render': this.render
         });
         this.listenTo(application.appState, 'change:currentTrack',
             function(appState, currentTrack) {
@@ -57,13 +58,13 @@ const Player = Mn.ItemView.extend({
                     break;
                 case 77: // m
                     //this.toggleVolume();
-                            let dialog = {
-            accept: () => {},
-            dismiss: () => {},
-            title: t('title track problem'),
-            message: t('track problem')
-        }
-        application.channel.request('dialog', dialog);
+                    let dialog = {
+                        accept: () => {},
+                        dismiss: () => {},
+                        title: t('title track problem'),
+                        message: t('track problem')
+                    }
+                    application.channel.request('dialog', dialog);
                     break;
             }
         });
