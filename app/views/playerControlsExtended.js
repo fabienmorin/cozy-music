@@ -15,6 +15,7 @@ const ControlsExtended = Mn.ItemView.extend({
 
     events: {
         'mousedown @ui.volumeBar': 'changeVol',
+        'wheel @ui.volumeBar': 'changeVolWheel',
         'click @ui.shuffle': 'toggleShuffle',
         'click @ui.repeat': 'toggleRepeat',
         'click @ui.speaker': 'toggleVolume'
@@ -98,6 +99,23 @@ const ControlsExtended = Mn.ItemView.extend({
         if (volume >= 0 && volume <= 1) {
             application.appState.set('currentVolume', volume);
         }
+    },
+
+    changeVolWheel(e) {
+        const wheelStep = 0.1;
+        let volume = application.appState.get('currentVolume', volume);
+        if (e.originalEvent.wheelDelta > 0 ) {
+           volume  += wheelStep;
+        } else {
+            volume -= wheelStep;
+        }
+
+        if (volume > 1) {
+            volume = 1;
+        } else if (volume < 0) {
+            volume = 0;
+        }
+        application.appState.set('currentVolume', volume);
     },
 
     serializeData() {
