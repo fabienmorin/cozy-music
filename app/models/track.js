@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 import scdl from '../libs/soundcloud';
 import cozysdk from 'cozysdk-client';
+import application from '../application';
 
 const Track = Backbone.Model.extend({
 
@@ -49,7 +50,11 @@ const Track = Backbone.Model.extend({
     getStream(callback) {
         let ressource = this.get('ressource');
         this.set('plays', this.get('plays') +1); // Update the plays number
-        this.save();
+        cozysdk.find('Track', this.get('_id')).then((res) => {
+            this.set('metas', res.metas);
+            application.channel.trigger('player:render');
+            this.save(); // Save only after retrieving the picture or it will delete it.
+        });
         switch (ressource.type) {
             case 'file':
                 let id = this.get('ressource').fileID;

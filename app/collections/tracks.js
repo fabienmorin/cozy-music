@@ -43,7 +43,21 @@ let callback = (error, response) => {};
 
 cozysdk.defineView('Track', 'playableByTitle', (doc) => {
     if (!doc.hidden && doc.metas) {
-        emit(doc.metas.title, doc);
+        emit(doc.metas.title, {
+            _id: doc._id,
+            playlists: doc.playlists,
+            metas: {
+                title: doc.metas.title,
+                artist: doc.metas.artist,
+                genre: doc.metas.genre,
+                album: doc.metas.album,
+                duration: doc.metas.duration,
+            },
+            dateAdded: doc.dateAdded,
+            plays: doc.plays,
+            ressource: doc.ressource,
+            hidden: doc.hidden
+        });
     }
 }, callback);
 
