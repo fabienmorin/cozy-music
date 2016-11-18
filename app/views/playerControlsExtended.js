@@ -8,6 +8,7 @@ const ControlsExtended = Mn.ItemView.extend({
 
     ui: {
         volumeBar: '#volume-bar',
+        controlsArea: '#controls-area',
         shuffle: '#shuffle',
         repeat: '#repeat',
         speaker: '#speaker'
@@ -15,7 +16,7 @@ const ControlsExtended = Mn.ItemView.extend({
 
     events: {
         'mousedown @ui.volumeBar': 'changeVol',
-        'wheel @ui.volumeBar': 'changeVolWheel',
+        'wheel @ui.controlsArea': 'changeVolWheel',
         'click @ui.shuffle': 'toggleShuffle',
         'click @ui.repeat': 'toggleRepeat',
         'click @ui.speaker': 'toggleVolume'
